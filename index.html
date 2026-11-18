@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<!--
+  index.html = the SKELETON of the website.
+  HTML decides WHAT is on the page (title, links, boxes, buttons).
+  style.css decides HOW it looks. script.js decides what it DOES.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mystics Lair - Video Game Music Arrangements</title>
+
+  <!-- Connects this page to the look (CSS file) -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========== THE MAIN WRAPPER: keeps everything centered ========== -->
+  <div id="wrapper">
+
+    <!-- ===== BOX 1: TITLE ===== -->
+    <header id="title-box">
+      <h1>Mystics Lair</h1>
+      <p class="subtitle">Video Game Music Arrangements &bull; MIDI &amp; MP3</p>
+    </header>
+
+    <!-- ===== BOX 2: LINKS + SEARCH BAR (turned off for now) =====
+         Everything between the comment markers is hidden from the page.
+         To bring the strip back, delete the line that says "OFF START"
+         and the line that says "OFF END".
+    OFF START
+    <nav id="nav-bar">
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+      </div>
+      <div class="search">
+        <input type="text" id="search-input" placeholder="Search">
+        <button type="button" id="search-button">Search</button>
+      </div>
+    </nav>
+    OFF END -->
+
+    <!-- ===== THE ARRANGEMENTS (the 3 boxes) ===== -->
+    <main id="arrangements">
+
+      <!-- Small heading bar above the boxes -->
+      <h2 class="section-heading">Arrangements</h2>
+      <!-- script.js fills in this sentence, e.g. "Showing all 3 arrangements" -->
+      <p id="count"></p>
+
+      <!--
+        ONE ARRANGEMENT = everything between <article> and </article>.
+        data-mp3 = the MP3 file the Play button plays.
+        The "player" part = the Play button + the seek bar
+        (time so far | a line you can drag | total length).
+        To add a new one: copy a whole <article>...</article> block,
+        paste it below the last one, and change the file names and text.
+      -->
+
+      <!-- ---------- Arrangement 1 ---------- -->
+      <article class="arrangement" data-mp3="music/arrangement1.mp3">
+        <img class="cover" src="images/cover1.svg" alt="Cover art for Boss Theme">
+        <div class="info">
+          <h3 class="track-title">Boss Theme</h3>
+          <p class="details"><b>Some RPG</b> &bull; 2026</p>
+          <p class="description">A short sentence about this arrangement.</p>
+          <div class="player">
+            <button type="button" class="play-button">&#9658; Play</button>
+            <div class="seek-bar">
+              <span class="time-current">0:00</span>
+              <input type="range" class="seek" min="0" max="0" step="0.1" value="0" aria-label="Song position">
+              <span class="time-total">0:00</span>
+            </div>
+          </div>
+        </div>
+        <div class="downloads">
+          <a href="music/arrangement1.mp3" download>MP3</a> | <a href="midi/arrangement1.mid" download>Midi</a>
+        </div>
+      </article>
+
+      <!-- ---------- Arrangement 2 ---------- -->
+      <article class="arrangement" data-mp3="music/arrangement2.mp3">
+        <img class="cover" src="images/cover2.svg" alt="Cover art for Title Screen">
+        <div class="info">
+          <h3 class="track-title">Title Screen</h3>
+          <p class="details"><b>Another Game</b> &bull; 2026</p>
+          <p class="description">Arranged for the MU2000 with extra strings.</p>
+          <div class="player">
+            <button type="button" class="play-button">&#9658; Play</button>
+            <div class="seek-bar">
+              <span class="time-current">0:00</span>
+              <input type="range" class="seek" min="0" max="0" step="0.1" value="0" aria-label="Song position">
+              <span class="time-total">0:00</span>
+            </div>
+          </div>
+        </div>
+        <div class="downloads">
+          <a href="music/arrangement2.mp3" download>MP3</a> | <a href="midi/arrangement2.mid" download>Midi</a>
+        </div>
+      </article>
+
+      <!-- ---------- Arrangement 3 ---------- -->
+      <article class="arrangement" data-mp3="music/arrangement3.mp3">
+        <img class="cover" src="images/cover3.svg" alt="Cover art for Battle Remix">
+        <div class="info">
+          <h3 class="track-title">Battle Remix</h3>
+          <p class="details"><b>Some RPG</b> &bull; 2025</p>
+          <p class="description">A faster, louder take on the battle music.</p>
+          <div class="player">
+            <button type="button" class="play-button">&#9658; Play</button>
+            <div class="seek-bar">
+              <span class="time-current">0:00</span>
+              <input type="range" class="seek" min="0" max="0" step="0.1" value="0" aria-label="Song position">
+              <span class="time-total">0:00</span>
+            </div>
+          </div>
+        </div>
+        <div class="downloads">
+          <a href="music/arrangement3.mp3" download>MP3</a> | <a href="midi/arrangement3.mid" download>Midi</a>
+        </div>
+      </article>
+
+      <!-- Shown by script.js only when the search finds nothing -->
+      <p id="no-results" hidden>No arrangements match your search.</p>
+
+    </main>
+
+
+  </div>
+
+  <!-- Connects this page to the behavior (JavaScript file). It goes LAST so the page loads first. -->
+  <script src="script.js"></script>
+</body>
+</html>

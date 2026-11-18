@@ -1,0 +1,292 @@
+/*
+  style.css = the LOOK of the website.
+  Each block says: "find THIS thing on the page { and style it like THIS }".
+    #name  = finds the element with id="name"   (only one on the page)
+    .name  = finds elements with class="name"   (can be many)
+*/
+
+/* ---------- THE WHOLE PAGE ---------- */
+/* "html" is the whole browser window. min-height: 100% makes the background fill it. */
+html {
+  min-height: 100%;
+  /* Plain background that fades from white (top) to beige (bottom) */
+  background: linear-gradient(to bottom, #ffffff, #efe6d2);
+}
+
+body {
+  margin: 0;
+  padding: 20px 0;
+  font-family: Verdana, Tahoma, Arial, sans-serif; /* classic 2000s web fonts */
+  font-size: 12px;
+  color: #222222;
+}
+
+/* All links: classic blue and underlined */
+a {
+  color: #0033cc;
+}
+
+a:hover {
+  color: #cc3300;
+}
+
+/* ---------- WRAPPER: a fixed-width column in the middle ---------- */
+#wrapper {
+  width: 760px;
+  max-width: 96%;   /* shrinks on small screens like phones */
+  margin: 0 auto;   /* "auto" on left and right = centered */
+  background: #ffffff;
+  border: 1px solid #b5b5b5;
+}
+
+/* ---------- BOX 1: TITLE ---------- */
+#title-box {
+  padding: 16px 16px 14px;
+  /* One solid navy blue color */
+  background: #1f3a6e;
+  border-bottom: 1px solid #14284f;
+}
+
+#title-box h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #ffffff;
+  text-shadow: 2px 2px 0 #0d1d3d; /* small dark shadow behind the letters */
+}
+
+#title-box .subtitle {
+  margin: 6px 0 0;
+  font-weight: bold;
+  color: #dbe4f5;
+}
+
+/* ---------- BOX 2: NAV BAR (links + search) ---------- */
+#nav-bar {
+  display: flex;                  /* puts the links and search on one line */
+  justify-content: space-between; /* links on the left, search on the right */
+  align-items: center;
+  flex-wrap: wrap;                /* lets it wrap on small screens */
+  gap: 8px;
+  padding: 6px 16px;
+  background: #e8e8e8;
+  border-bottom: 1px solid #b5b5b5;
+}
+
+.nav-links a {
+  font-weight: bold;
+}
+
+.search input {
+  width: 180px;
+  padding: 2px 4px;
+  font-family: inherit;
+  font-size: 12px;
+  border: 1px solid #8a8a8a;
+}
+
+/*
+  Old Windows (95/98) style buttons, used for Search and Play/Stop.
+  The 3D trick: light edges on the top + left, dark edges on the bottom + right.
+  Your eye reads that as a raised block with light shining from the top-left.
+*/
+button {
+  padding: 3px 9px;
+  font-family: Tahoma, Verdana, Arial, sans-serif; /* the old Windows button font */
+  font-size: 11px;
+  color: #000000;
+  background: #e0e0e0;   /* soft light gray */
+  border-radius: 0;      /* perfectly square corners */
+  /* Edges: white on top + left, gray on bottom + right */
+  border: 1px solid;
+  border-color: #ffffff #a0a0a0 #a0a0a0 #ffffff;
+  /* A thin soft shadow just outside the bottom + right edges */
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer; /* hand cursor on hover */
+}
+
+/* :active = while the mouse button is held down.
+   Flipping the light and gray edges makes the button look pushed IN. */
+button:active {
+  border-color: #a0a0a0 #ffffff #ffffff #a0a0a0;
+  box-shadow: none;
+  padding: 4px 8px 2px 10px; /* nudges the text down-right, like real Windows did */
+}
+
+/* Dotted box around a clicked button, another old Windows detail */
+button:focus-visible {
+  outline: 1px dotted #000000;
+  outline-offset: -4px;
+}
+
+/* "disabled" = the button can't be clicked (used for "No file").
+   Old Windows showed this as gray text with a white "engraved" shadow. */
+button:disabled {
+  color: #808080;
+  text-shadow: 1px 1px 0 #ffffff;
+  cursor: default;
+}
+
+/* ---------- THE ARRANGEMENTS AREA ---------- */
+#arrangements {
+  width: 86%;          /* narrower than the title, like your sketch */
+  margin: 16px auto;   /* centered */
+}
+
+/* "Arrangements" heading with a blue stripe on the left */
+.section-heading {
+  margin: 0 0 6px;
+  padding: 5px 8px;
+  font-size: 14px;
+  color: #000000;
+  background: #eef2fa;
+  border-left: 4px solid #1f3a6e;
+  border-bottom: 1px solid #c9d3e8;
+}
+
+#count {
+  margin: 0 0 10px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+/* ONE ARRANGEMENT BOX: image | info | downloads, side by side */
+.arrangement {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+  padding: 8px;
+  background: #f4f4f4;
+  border: 1px solid #c4c4c4;
+}
+
+/* The box that is playing turns yellow (script.js adds the "playing" class) */
+.arrangement.playing {
+  background: #fff1b0;
+  border-color: #d9c060;
+}
+
+/* The cover image on the left */
+.arrangement .cover {
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;        /* stops the image from getting squished */
+  object-fit: cover;     /* crops instead of stretching */
+  border: 1px solid #b5b5b5;
+}
+
+/* The text + Play button in the middle */
+.arrangement .info {
+  flex: 1;      /* takes up the rest of the space */
+  min-width: 0;
+}
+
+.track-title {
+  margin: 0 0 3px;
+  font-size: 13px;
+}
+
+.details {
+  margin: 0 0 3px;
+}
+
+.description {
+  margin: 0 0 7px;
+  font-size: 11px;
+  color: #555555;
+}
+
+.play-button {
+  min-width: 54px;
+}
+
+/* ---------- THE PLAYER ROW: Play button + seek bar side by side ---------- */
+.player {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* The bar: "0:00 ------- 2:27" (see-through, so the box color shows behind it) */
+.seek-bar {
+  flex: 1;              /* stretches to fill the rest of the row */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+  background: transparent; /* see-through */
+  color: #222222;          /* dark text, readable on gray and yellow */
+  font-size: 11px;
+  font-weight: bold;
+}
+
+/* The times never get squished */
+.time-current,
+.time-total {
+  flex-shrink: 0;
+  min-width: 28px;
+}
+.time-total { text-align: right; }
+
+/*
+  The line you can drag (an <input type="range">).
+  Browsers draw these differently, so we reset it and draw our own.
+  --progress is a number script.js updates (like 40%) so the part
+  already played is darker than the part still to come.
+*/
+.seek {
+  flex: 1;
+  height: 12px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-appearance: none;  /* removes the browser's own look */
+  appearance: none;
+  --progress: 0%;
+}
+
+/* The line itself (Chrome, Edge, Safari) */
+.seek::-webkit-slider-runnable-track {
+  height: 2px;
+  background: linear-gradient(to right, #333333 var(--progress), #b0b0b0 var(--progress));
+}
+
+/* The little dot you drag (Chrome, Edge, Safari) */
+.seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 8px;
+  height: 8px;
+  margin-top: -3px;          /* centers the dot on the 2px line */
+  border-radius: 50%;
+  background: #333333;
+}
+
+/* Same thing for Firefox, which uses different names */
+.seek::-moz-range-track    { height: 2px; background: #b0b0b0; }
+.seek::-moz-range-progress { height: 2px; background: #333333; }
+.seek::-moz-range-thumb    { width: 8px; height: 8px; border: none; border-radius: 50%; background: #333333; }
+
+/* When there's no MP3 file, the bar fades out */
+.seek:disabled { cursor: default; }
+.seek-bar:has(.seek:disabled) { opacity: 0.4; }
+
+/* "MP3 | Midi" on the right side */
+.downloads {
+  flex-shrink: 0;
+  padding-right: 6px;
+  white-space: nowrap; /* keeps "MP3 | Midi" on one line */
+}
+
+#no-results {
+  padding: 10px;
+  text-align: center;
+  background: #f4f4f4;
+  border: 1px solid #c4c4c4;
+}
+
+/* ---------- PHONES: stack everything when the screen is narrow ---------- */
+@media (max-width: 520px) {
+  #arrangements { width: 92%; }
+  .arrangement  { flex-direction: column; text-align: center; }
+  .arrangement .info { width: 100%; }
+}
