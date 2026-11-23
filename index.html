@@ -40,12 +40,12 @@
     </nav>
     OFF END -->
 
-    <!-- ===== THE ARRANGEMENTS (the 3 boxes) ===== -->
+    <!-- ===== THE ARRANGEMENTS (one box per song) ===== -->
     <main id="arrangements">
 
       <!-- Small heading bar above the boxes -->
       <h2 class="section-heading">Arrangements</h2>
-      <!-- script.js fills in this sentence, e.g. "Showing all 3 arrangements" -->
+      <!-- script.js fills in this sentence, e.g. "Showing 1 arrangement" -->
       <p id="count"></p>
 
       <!--
@@ -53,17 +53,20 @@
         data-mp3 = the MP3 file the Play button plays.
         The "player" part = the Play button + the seek bar
         (time so far | a line you can drag | total length).
+        The "downloads" part = the two stacked MP3 and MIDI boxes on the right.
         To add a new one: copy a whole <article>...</article> block,
         paste it below the last one, and change the file names and text.
       -->
 
       <!-- ---------- Arrangement 1 ---------- -->
-      <article class="arrangement" data-mp3="music/arrangement1.mp3">
-        <img class="cover" src="images/cover1.svg" alt="Cover art for Boss Theme">
+      <article class="arrangement" data-mp3="music/Mega_Man_-_Cut_Man_Theme.mp3">
+        <img class="cover" src="images/megaman.png" alt="Mega Man logo">
         <div class="info">
-          <h3 class="track-title">Boss Theme</h3>
-          <p class="details"><b>Some RPG</b> &bull; 2026</p>
+          <h3 class="track-title">Cut Man Theme</h3>
+          <p class="details"><b>Mega Man</b> &bull; 11/23/2026</p>
+          <!-- DESCRIPTION OFF START (to bring it back, delete this line and the "OFF END" line)
           <p class="description">A short sentence about this arrangement.</p>
+          DESCRIPTION OFF END -->
           <div class="player">
             <button type="button" class="play-button">&#9658; Play</button>
             <div class="seek-bar">
@@ -74,49 +77,8 @@
           </div>
         </div>
         <div class="downloads">
-          <a href="music/arrangement1.mp3" download>MP3</a> | <a href="midi/arrangement1.mid" download>Midi</a>
-        </div>
-      </article>
-
-      <!-- ---------- Arrangement 2 ---------- -->
-      <article class="arrangement" data-mp3="music/arrangement2.mp3">
-        <img class="cover" src="images/cover2.svg" alt="Cover art for Title Screen">
-        <div class="info">
-          <h3 class="track-title">Title Screen</h3>
-          <p class="details"><b>Another Game</b> &bull; 2026</p>
-          <p class="description">Arranged for the MU2000 with extra strings.</p>
-          <div class="player">
-            <button type="button" class="play-button">&#9658; Play</button>
-            <div class="seek-bar">
-              <span class="time-current">0:00</span>
-              <input type="range" class="seek" min="0" max="0" step="0.1" value="0" aria-label="Song position">
-              <span class="time-total">0:00</span>
-            </div>
-          </div>
-        </div>
-        <div class="downloads">
-          <a href="music/arrangement2.mp3" download>MP3</a> | <a href="midi/arrangement2.mid" download>Midi</a>
-        </div>
-      </article>
-
-      <!-- ---------- Arrangement 3 ---------- -->
-      <article class="arrangement" data-mp3="music/arrangement3.mp3">
-        <img class="cover" src="images/cover3.svg" alt="Cover art for Battle Remix">
-        <div class="info">
-          <h3 class="track-title">Battle Remix</h3>
-          <p class="details"><b>Some RPG</b> &bull; 2025</p>
-          <p class="description">A faster, louder take on the battle music.</p>
-          <div class="player">
-            <button type="button" class="play-button">&#9658; Play</button>
-            <div class="seek-bar">
-              <span class="time-current">0:00</span>
-              <input type="range" class="seek" min="0" max="0" step="0.1" value="0" aria-label="Song position">
-              <span class="time-total">0:00</span>
-            </div>
-          </div>
-        </div>
-        <div class="downloads">
-          <a href="music/arrangement3.mp3" download>MP3</a> | <a href="midi/arrangement3.mid" download>Midi</a>
+          <a class="download-box" href="music/Mega_Man_-_Cut_Man_Theme.mp3" download>MP3</a>
+          <a class="download-box" href="midi/Megaman_Cutman_Theme.mid" download>MIDI</a>
         </div>
       </article>
 

@@ -144,11 +144,18 @@ function runSearch() {
   arrangements.forEach(function (box) {
     // Only search the title, game/year, and description
     // (not the button or the times on the seek bar).
-    const boxText = (
+    let boxText =
       box.querySelector(".track-title").textContent + " " +
-      box.querySelector(".details").textContent + " " +
-      box.querySelector(".description").textContent
-    ).toLowerCase();
+      box.querySelector(".details").textContent;
+
+    // Some boxes have no description (it can be turned off in index.html).
+    // Only add it if this box HAS one, otherwise the code would crash.
+    const description = box.querySelector(".description");
+    if (description !== null) {
+      boxText = boxText + " " + description.textContent;
+    }
+
+    boxText = boxText.toLowerCase();
 
     if (boxText.includes(typed)) {
       box.hidden = false; // matches -> show it
@@ -174,10 +181,19 @@ if (searchInput !== null) {
 // ---------- JOB 3: THE COUNT ("Showing all 3 arrangements") ----------
 function updateCount(shown, typed) {
   const total = arrangements.length;
-  if (typed === "") {
-    countText.textContent = "Showing all " + total + " arrangements";
+
+  // English: "1 arrangement" (no s), but "3 arrangements" (with s).
+  let word = "arrangements";
+  if (total === 1) {
+    word = "arrangement";
+  }
+
+  if (typed === "" && total === 1) {
+    countText.textContent = "Showing 1 arrangement";              // just one song
+  } else if (typed === "") {
+    countText.textContent = "Showing all " + total + " " + word;  // e.g. "Showing all 3 arrangements"
   } else {
-    countText.textContent = "Showing " + shown + " of " + total + " arrangements";
+    countText.textContent = "Showing " + shown + " of " + total + " " + word;
   }
 }
 

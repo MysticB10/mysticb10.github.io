@@ -196,6 +196,12 @@ button:disabled {
   color: #555555;
 }
 
+/* A player that comes right after the game/date line (= no description in between)
+   gets a little space above it, the same 7px the description used to give. */
+.details + .player {
+  margin-top: 7px;
+}
+
 .play-button {
   min-width: 54px;
 }
@@ -270,12 +276,35 @@ button:disabled {
 .seek:disabled { cursor: default; }
 .seek-bar:has(.seek:disabled) { opacity: 0.4; }
 
-/* "MP3 | Midi" on the right side */
+/* ---------- THE MP3 / MIDI BOXES on the right side ---------- */
+/* The area that holds the two boxes */
 .downloads {
   flex-shrink: 0;
-  padding-right: 6px;
-  white-space: nowrap; /* keeps "MP3 | Midi" on one line */
+  align-self: stretch;     /* as tall as the whole arrangement box */
+  display: flex;
+  flex-direction: column;  /* stack the two boxes top to bottom */
 }
+
+/* Each box (MP3 on top, MIDI underneath). The whole box is the link. */
+.download-box {
+  flex: 1;                   /* each box gets an equal share of the height */
+  display: flex;
+  align-items: center;       /* centers the word up-and-down */
+  justify-content: center;   /* centers the word left-and-right */
+  width: 70px;
+  background: #f4f4f4;       /* same light gray as the arrangement box */
+  border: 1px solid #c4c4c4; /* same thin gray border as the arrangement box */
+  color: #222222;            /* same dark gray as the song titles */
+  font-weight: bold;
+  text-decoration: none;     /* no underline */
+}
+
+/* "A box right after another box" = the MIDI box.
+   It drops its top border so the line between the two isn't double-thick. */
+.download-box + .download-box { border-top: none; }
+
+/* Mouse over a box: white background, orange word */
+.download-box:hover { background: #ffffff; color: #cc3300; }
 
 #no-results {
   padding: 10px;
@@ -289,4 +318,11 @@ button:disabled {
   #arrangements { width: 92%; }
   .arrangement  { flex-direction: column; text-align: center; }
   .arrangement .info { width: 100%; }
+
+  /* MP3 and MIDI sit side by side under the player instead of stacked */
+  .downloads    { flex-direction: row; width: 100%; }
+  .download-box { width: auto; padding: 8px 0; }
+  /* Side by side, the MIDI box needs its top border back,
+     and drops its LEFT border instead (the MP3 box already draws that line) */
+  .download-box + .download-box { border-top: 1px solid #c4c4c4; border-left: none; }
 }
