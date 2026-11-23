@@ -85,7 +85,7 @@ a:hover {
 }
 
 /*
-  Old Windows (95/98) style buttons, used for Search and Play/Stop.
+  Old Windows (95/98) style buttons, used for Search, Play/Stop and Loop.
   The 3D trick: light edges on the top + left, dark edges on the bottom + right.
   Your eye reads that as a raised block with light shining from the top-left.
 */
@@ -206,7 +206,28 @@ button:disabled {
   min-width: 54px;
 }
 
-/* ---------- THE PLAYER ROW: Play button + seek bar side by side ---------- */
+/* ---------- THE LOOP BUTTON ---------- */
+/* Never let the button shrink or wrap its text onto two lines */
+.loop-button {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/*
+  Loop is ON (script.js sets aria-pressed="true").
+  It STAYS pushed in, like a real on/off switch in old Windows:
+  flipped edges (dark top + left, white bottom + right),
+  no shadow, and a slightly darker gray inside.
+  The [aria-pressed="true"] part means "only when that attribute says true".
+*/
+.loop-button[aria-pressed="true"] {
+  background: #c8c8c8;
+  border-color: #a0a0a0 #ffffff #ffffff #a0a0a0;
+  box-shadow: none;
+  padding: 4px 8px 2px 10px; /* text nudged down-right, same as :active */
+}
+
+/* ---------- THE PLAYER ROW: Play button + Loop button + seek bar side by side ---------- */
 .player {
   display: flex;
   align-items: center;

@@ -51,7 +51,7 @@
       <!--
         ONE ARRANGEMENT = everything between <article> and </article>.
         data-mp3 = the MP3 file the Play button plays.
-        The "player" part = the Play button + the seek bar
+        The "player" part = the Play button + the Loop button + the seek bar
         (time so far | a line you can drag | total length).
         The "downloads" part = the two stacked MP3 and MIDI boxes on the right.
         To add a new one: copy a whole <article>...</article> block,
@@ -69,6 +69,9 @@
           DESCRIPTION OFF END -->
           <div class="player">
             <button type="button" class="play-button">&#9658; Play</button>
+            <!-- Loop button: click once = ON (looks pushed in), click again = OFF.
+                 aria-pressed tells screen readers whether it's on ("true") or off ("false"). -->
+            <button type="button" class="loop-button" aria-pressed="false" title="Repeat this song">&#8635; Loop</button>
             <div class="seek-bar">
               <span class="time-current">0:00</span>
               <input type="range" class="seek" min="0" max="0" step="0.1" value="0" aria-label="Song position">

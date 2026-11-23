@@ -1,7 +1,7 @@
 /*
   script.js = what the website DOES.
   It does three jobs:
-    1. The players: Play / Stop buttons and the seek bars
+    1. The players: Play / Stop buttons, Loop buttons and the seek bars
        (only one song plays at a time).
     2. The search bar hides arrangements that don't match.
     3. Shows how many arrangements are on screen.
@@ -36,6 +36,7 @@ function formatTime(seconds) {
 arrangements.forEach(function (box) {
   // The pieces inside THIS box
   const button      = box.querySelector(".play-button");
+  const loopButton  = box.querySelector(".loop-button");
   const seek        = box.querySelector(".seek");
   const currentText = box.querySelector(".time-current");
   const totalText   = box.querySelector(".time-total");
@@ -86,6 +87,8 @@ arrangements.forEach(function (box) {
   player.addEventListener("pause", resetLook);
 
   // Song finished -> back to the start.
+  // (When Loop is ON, the song never "ends": the browser jumps straight
+  //  back to 0:00 and keeps playing, so this part doesn't run.)
   player.addEventListener("ended", function () {
     resetLook();
     player.currentTime = 0;
@@ -96,6 +99,7 @@ arrangements.forEach(function (box) {
   player.addEventListener("error", function () {
     button.textContent = "No file";
     button.disabled = true;
+    loopButton.disabled = true; // nothing to loop either
     seek.disabled = true;
   });
 
@@ -118,6 +122,17 @@ arrangements.forEach(function (box) {
     });
 
     player.play();
+  });
+
+  // LOOP button: flips looping ON and OFF.
+  // player.loop is built into every browser's audio player:
+  //   true  = when the song reaches the end, start again from 0:00
+  //   false = stop at the end (normal)
+  loopButton.addEventListener("click", function () {
+    player.loop = !player.loop; // "!" means "the opposite of", so true becomes false and false becomes true
+
+    // Tell the page whether it's on, so style.css can make the button look pushed in.
+    loopButton.setAttribute("aria-pressed", String(player.loop));
   });
 
   // SEEK BAR
