@@ -227,7 +227,7 @@ button:disabled {
   padding: 4px 8px 2px 10px; /* text nudged down-right, same as :active */
 }
 
-/* ---------- THE PLAYER ROW: Play button + Loop button + seek bar side by side ---------- */
+/* ---------- THE PLAYER ROW: Play + Loop + seek bar + volume bar side by side ---------- */
 .player {
   display: flex;
   align-items: center;
@@ -256,13 +256,15 @@ button:disabled {
 .time-total { text-align: right; }
 
 /*
-  The line you can drag (an <input type="range">).
-  Browsers draw these differently, so we reset it and draw our own.
+  The lines you can drag (each one is an <input type="range">):
+  the seek bar (.seek) AND the volume bar (.volume) share this look.
+  A comma between two names means "apply this to both".
+  Browsers draw these differently, so we reset them and draw our own.
   --progress is a number script.js updates (like 40%) so the part
-  already played is darker than the part still to come.
+  before the dot is darker than the part after it.
 */
-.seek {
-  flex: 1;
+.seek,
+.volume {
   height: 12px;
   margin: 0;
   background: transparent;
@@ -272,14 +274,19 @@ button:disabled {
   --progress: 0%;
 }
 
+.seek { flex: 1; }          /* the seek line stretches to fill its space */
+.volume { width: 60px; }    /* the volume line is short */
+
 /* The line itself (Chrome, Edge, Safari) */
-.seek::-webkit-slider-runnable-track {
+.seek::-webkit-slider-runnable-track,
+.volume::-webkit-slider-runnable-track {
   height: 2px;
   background: linear-gradient(to right, #333333 var(--progress), #b0b0b0 var(--progress));
 }
 
 /* The little dot you drag (Chrome, Edge, Safari) */
-.seek::-webkit-slider-thumb {
+.seek::-webkit-slider-thumb,
+.volume::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 8px;
   height: 8px;
@@ -289,13 +296,33 @@ button:disabled {
 }
 
 /* Same thing for Firefox, which uses different names */
-.seek::-moz-range-track    { height: 2px; background: #b0b0b0; }
-.seek::-moz-range-progress { height: 2px; background: #333333; }
-.seek::-moz-range-thumb    { width: 8px; height: 8px; border: none; border-radius: 50%; background: #333333; }
+.seek::-moz-range-track,    .volume::-moz-range-track    { height: 2px; background: #b0b0b0; }
+.seek::-moz-range-progress, .volume::-moz-range-progress { height: 2px; background: #333333; }
+.seek::-moz-range-thumb,    .volume::-moz-range-thumb    { width: 8px; height: 8px; border: none; border-radius: 50%; background: #333333; }
 
-/* When there's no MP3 file, the bar fades out */
-.seek:disabled { cursor: default; }
-.seek-bar:has(.seek:disabled) { opacity: 0.4; }
+/* When there's no MP3 file, the bars fade out */
+.seek:disabled,
+.volume:disabled { cursor: default; }
+.seek-bar:has(.seek:disabled),
+.volume-bar:has(.volume:disabled) { opacity: 0.4; }
+
+/* ---------- THE VOLUME BAR: "Vol ---- 100" ---------- */
+.volume-bar {
+  flex-shrink: 0;        /* never gets squished */
+  margin-left: 6px;      /* a bit of extra space after the song's total time */
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #222222;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+/* The number never jumps around when it goes from 100 to 5 */
+.volume-number {
+  min-width: 22px;
+  text-align: right;
+}
 
 /* ---------- THE MP3 / MIDI BOXES on the right side ---------- */
 /* The area that holds the two boxes */
@@ -324,8 +351,9 @@ button:disabled {
    It drops its top border so the line between the two isn't double-thick. */
 .download-box + .download-box { border-top: none; }
 
-/* Mouse over a box: white background, orange word */
-.download-box:hover { background: #ffffff; color: #cc3300; }
+/* Mouse over a box: white background, light blue word
+   (a lighter version of the title box's navy #1f3a6e) */
+.download-box:hover { background: #ffffff; color: #4a73c0; }
 
 #no-results {
   padding: 10px;
@@ -339,6 +367,10 @@ button:disabled {
   #arrangements { width: 92%; }
   .arrangement  { flex-direction: column; text-align: center; }
   .arrangement .info { width: 100%; }
+
+  /* The player row can wrap onto two lines; the volume bar gets its own line */
+  .player       { flex-wrap: wrap; }
+  .volume-bar   { width: 100%; margin-left: 0; justify-content: center; }
 
   /* MP3 and MIDI sit side by side under the player instead of stacked */
   .downloads    { flex-direction: row; width: 100%; }

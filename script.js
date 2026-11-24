@@ -1,7 +1,7 @@
 /*
   script.js = what the website DOES.
   It does three jobs:
-    1. The players: Play / Stop buttons, Loop buttons and the seek bars
+    1. The players: Play / Stop buttons, Loop buttons, seek bars and volume bars
        (only one song plays at a time).
     2. The search bar hides arrangements that don't match.
     3. Shows how many arrangements are on screen.
@@ -40,6 +40,8 @@ arrangements.forEach(function (box) {
   const seek        = box.querySelector(".seek");
   const currentText = box.querySelector(".time-current");
   const totalText   = box.querySelector(".time-total");
+  const volume      = box.querySelector(".volume");
+  const volumeText  = box.querySelector(".volume-number");
 
   // Each box gets its own invisible music player.
   // preload = "metadata" loads just the song's length, not the whole song.
@@ -101,6 +103,7 @@ arrangements.forEach(function (box) {
     button.disabled = true;
     loopButton.disabled = true; // nothing to loop either
     seek.disabled = true;
+    volume.disabled = true;
   });
 
   // PLAY / STOP button
@@ -134,6 +137,21 @@ arrangements.forEach(function (box) {
     // Tell the page whether it's on, so style.css can make the button look pushed in.
     loopButton.setAttribute("aria-pressed", String(player.loop));
   });
+
+  // VOLUME BAR
+  // The slider goes from 0 to 100 (easy for people to read),
+  // but the browser's player.volume goes from 0 to 1.
+  // So we divide by 100: 100 -> 1 (full), 50 -> 0.5 (half), 0 -> 0 (silent).
+  function setVolume() {
+    const amount = Number(volume.value);          // the slider's number, 0 to 100
+    player.volume = amount / 100;                 // tell the player
+    volumeText.textContent = amount;              // show the number next to the slider
+    volume.style.setProperty("--progress", amount + "%"); // darken the line up to the dot
+  }
+
+  // "input" fires the moment the dot moves, so the sound changes while you drag.
+  volume.addEventListener("input", setVolume);
+  setVolume(); // run once at the start so everything matches (100)
 
   // SEEK BAR
   // "input" = while dragging: only update the time text, don't jump yet.
