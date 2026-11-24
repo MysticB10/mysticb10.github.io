@@ -54,6 +54,9 @@
         The "player" part = the Play button + the Loop button + the seek bar
         (time so far | a line you can drag | total length) + the volume bar (0 to 100).
         The "downloads" part = the two stacked MP3 and MIDI boxes on the right.
+        Each box has its own data-goatcounter-click name (like "cutman-mp3"),
+        so your stats count MP3 and MIDI downloads separately.
+        When you add a new song, give its boxes new names (like "woodman-mp3").
         To add a new one: copy a whole <article>...</article> block,
         paste it below the last one, and change the file names and text.
       -->
@@ -87,8 +90,11 @@
           </div>
         </div>
         <div class="downloads">
-          <a class="download-box" href="music/Mega_Man_-_Cut_Man_Theme.mp3" download>MP3</a>
-          <a class="download-box" href="midi/Megaman_Cutman_Theme.mid" download>MIDI</a>
+          <!-- data-goatcounter-click = the name this download shows up as in your stats -->
+          <a class="download-box" href="music/Mega_Man_-_Cut_Man_Theme.mp3" download
+             data-goatcounter-click="cutman-mp3" data-goatcounter-title="Cut Man Theme - MP3 download">MP3</a>
+          <a class="download-box" href="midi/Megaman_Cutman_Theme.mid" download
+             data-goatcounter-click="cutman-midi" data-goatcounter-title="Cut Man Theme - MIDI download">MIDI</a>
         </div>
       </article>
 
@@ -102,5 +108,11 @@
 
   <!-- Connects this page to the behavior (JavaScript file). It goes LAST so the page loads first. -->
   <script src="script.js"></script>
+
+  <!-- GoatCounter: counts visits to the site, and MP3 / MIDI downloads.
+       Only you can see the numbers, at https://mysticslair.goatcounter.com
+       "async" = load it in the background so it never slows the page down. -->
+  <script data-goatcounter="https://mysticslair.goatcounter.com/count"
+          async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
