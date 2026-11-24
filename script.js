@@ -125,6 +125,17 @@ arrangements.forEach(function (box) {
     });
 
     player.play();
+
+    // Tell GoatCounter someone pressed Play (shows up as e.g. "cutman-play").
+    // The "if" checks that GoatCounter actually loaded. If an adblocker
+    // blocked it, we skip this part so the Play button still works.
+    if (window.goatcounter && window.goatcounter.count) {
+      window.goatcounter.count({
+        path:  box.dataset.track + "-play",   // reads data-track="cutman" from the HTML
+        title: box.querySelector(".track-title").textContent + " - Play",
+        event: true                           // a click, not a page visit
+      });
+    }
   });
 
   // LOOP button: flips looping ON and OFF.

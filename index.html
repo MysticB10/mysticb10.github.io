@@ -51,18 +51,21 @@
       <!--
         ONE ARRANGEMENT = everything between <article> and </article>.
         data-mp3 = the MP3 file the Play button plays.
+        data-track = a short name for the song, used in your GoatCounter stats
+                     (Play presses show up as "cutman-play").
         The "player" part = the Play button + the Loop button + the seek bar
         (time so far | a line you can drag | total length) + the volume bar (0 to 100).
         The "downloads" part = the two stacked MP3 and MIDI boxes on the right.
         Each box has its own data-goatcounter-click name (like "cutman-mp3"),
         so your stats count MP3 and MIDI downloads separately.
-        When you add a new song, give its boxes new names (like "woodman-mp3").
+        When you add a new song, give its boxes new names (like "woodman-mp3"),
+        and give it a new data-track name too (like data-track="woodman").
         To add a new one: copy a whole <article>...</article> block,
         paste it below the last one, and change the file names and text.
       -->
 
       <!-- ---------- Arrangement 1 ---------- -->
-      <article class="arrangement" data-mp3="music/Mega_Man_-_Cut_Man_Theme.mp3">
+      <article class="arrangement" data-mp3="music/Mega_Man_-_Cut_Man_Theme.mp3" data-track="cutman">
         <img class="cover" src="images/megaman.png" alt="Mega Man logo">
         <div class="info">
           <h3 class="track-title">Cut Man Theme</h3>
@@ -109,7 +112,7 @@
   <!-- Connects this page to the behavior (JavaScript file). It goes LAST so the page loads first. -->
   <script src="script.js"></script>
 
-  <!-- GoatCounter: counts visits to the site, and MP3 / MIDI downloads.
+  <!-- GoatCounter: counts visits to the site, MP3 / MIDI downloads, and Play presses.
        Only you can see the numbers, at https://mysticslair.goatcounter.com
        "async" = load it in the background so it never slows the page down. -->
   <script data-goatcounter="https://mysticslair.goatcounter.com/count"
